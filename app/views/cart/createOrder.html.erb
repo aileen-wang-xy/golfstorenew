@@ -1,0 +1,35 @@
+<h2> Thank you </h2>
+<p>You just placed an order </p>
+
+<table id = "customers">
+<tr>
+    <td> Order reference for the order that you just placed <%= @orders.id%></td>
+</tr>    
+</table>    
+    
+<table id ="customers">
+    <% @total =0 %>
+    <% @orderitems.each do |id, quantity| %>
+    <tr>
+       <% item =Orderitem.find_by_id(id) %> 
+        <td> <%= item.title %></td>
+        <td> <%= item.quantity %></td>
+        <td><%= number_to_currency(item.price, :unit => "€") %>  </td>
+        <td><%= number_to_currency(item.quantity* item.price, :unit => "€") %> </td>
+    <tr>    
+    
+    <% timx = (item.quantity * item.price) %>
+    <% @total += timx %>
+    <% end %>
+    <tr>
+        <td> Order Total : &euro ; <%= @total%> </td>
+        <% shipping =30 %>
+        <% @overall = shipping + @total %>
+        <tr>
+            <td> shipping &euro; 30 </td>
+            <td> You pay &euro; <%= @overall %></td>
+        </tr>    
+        
+    </tr>    
+    
+</table>    

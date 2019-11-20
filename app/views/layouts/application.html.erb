@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | The new Golfstore</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class = "headSec">
+    <h1>Saturday Eve Golf club</h1>
+   
+    
+     <ul>
+     <li><%= link_to 'Home', '/' %></li> 
+     <li><%= link_to 'Products', '/items' %></li>
+     <li><%= link_to 'VIew Orders', orders_path %></li>
+     <li><%= link_to 'View Cart', '/cart/index' %></li>
+      <li><%= link_to 'About', about_path %></li> 
+      <li><%= link_to 'Help', help_path %></li> 
+      
+      
+      <% if session[:login]==1%>
+       <li><%= link_to 'Admin logout', logout_path %></li> 
+       <%else%>
+        <li><%= link_to 'Admin login', login_path %></li> 
+        <%end %> 
+        
+         <% if user_signed_in? %>
+         <li><%= link_to 'Edit Profile', edit_user_registration_path %></li> 
+        <li><%= link_to 'Sign out',  destroy_user_session_path, :method => :delete %></li> 
+        <% else%>
+        <li><%= link_to 'Register', new_user_registration_path %></li> 
+        <li><%= link_to 'Sign in', new_user_session_path %></li> 
+        <% end %>
+         <%=render 'layouts/search' %>
+        
+     </ul>  
+    </header>
+    <div class ="container">
+    <%= yield %>
+    </div>
+    
+    <footer class = "foot">
+      <h3>footer goes here</h3>
+      
+    </footer>  
+    
+    
+  </body>
+</html>
